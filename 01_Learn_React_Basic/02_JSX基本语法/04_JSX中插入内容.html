@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script crossorigin src="../lib/react.js"></script>
+    <script crossorigin src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+
+    <script type="text/babel">
+        // 1、定义创建root
+        
+        // 1、定义App组件
+        class App extends React.Component{
+            constructor(){
+                super()
+                this.state = {
+                    counter:100,
+                    message: "Hello World",
+                    names:["abc","cba","nba"],
+                    aaa:undefined,
+                    bbb:null,
+                    ccc:true,
+                    friends:{name:'wjf'},
+                    firstname:"kobe",
+                    lastname:"bryant",
+                    age:20,
+                    movies:["流浪地球","独上月球","大话西游"],
+                }
+            }
+            
+            render(){
+                const { message,names,counter } = this.state
+                const { aaa,bbb,ccc } = this.state
+                const { friends } = this.state
+
+                const { firstname,lastname } = this.state
+                const fullname = firstname + " " + lastname
+
+                const {age} =this.state
+                const ageText = age >= 18 ? "成年人" : "未成年人"
+                const liEls = this.state.movies.map(movie => <li key={movie}>{movie}</li>)
+
+                return (
+                    <div>
+                        {/* 1、Number/String/Array,直接显示 */}
+                        <h2>{ counter }</h2>
+                        <h2>{ message }</h2>
+                        <h2>{names}</h2>
+
+                        {/* 2、undefined/null/Boolean,不显示。如果需要展示，需要先转换成字符串。 */}
+                        <h2>{ String(aaa) }</h2>
+                        <h2>{ bbb }</h2>
+                        <h2>{ ccc.toString() }</h2>
+
+                        {/* 3、Object不能作为子元素机进行展示 */}
+                        {/* <h2>{friends.name}</h2> */}
+                        <h2>{friends.name}</h2>
+                        <h2>{Object.keys(friends)[0]}</h2>
+
+                        {/* 4、插入表达式 */}
+                        <h2>{10+20}</h2>
+                        <h2>{firstname + " " + lastname}</h2>
+                        
+                        {/* 5、三元运算符 */}
+                        <h2>{ageText}</h2>
+                        
+                        {/* 6、调用方法获取结果 */}
+                        <ul>{liEls}</ul>
+                        <ul>{this.getMovieEls()}</ul>
+                    </div>
+                )
+            }
+
+            getMovieEls(){
+                const liEls = this.state.movies.map(movie => <li key={movie}>{movie}</li>)
+                return liEls
+            }
+        }
+        // 2、创建root并渲染App组件
+        const root = ReactDOM.createRoot(document.querySelector("#root"))
+        root.render(<App/>)
+    </script>
+    
+</body>
+</html>

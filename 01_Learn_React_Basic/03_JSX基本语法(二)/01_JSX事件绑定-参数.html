@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script crossorigin src="../lib/react.js"></script>
+    <script crossorigin src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+
+    <script type="text/babel">
+        // 1、定义创建root
+        
+        // 1、定义App组件
+        class App extends React.Component{
+            constructor(){
+                super()
+                this.state = {
+                    message: "Hello World",
+                }
+            }
+
+            btnClick(event,name,age){
+                console.log(this)
+                console.log("name:",name,"age:",age)
+            }
+            
+            render(){
+                const { message } = this.state
+                return (
+                    <div>
+                        <h2>{ message }</h2>
+                        {/* 1、event参数传递 */}
+                        <button onClick={this.btnClick.bind(this)}>按钮1</button>
+                        <button onClick={(event) => this.btnClick(event)}>按钮2</button>
+
+
+                        {/* 2、额外的参数传递 */}
+                        <button onClick={this.btnClick.bind(this,"kobe",30)}>按钮3</button>
+                        <button onClick={(event) =>this.btnClick(event,"kobe",30)}>按钮4</button>
+                    </div>
+                )
+            }
+        }
+        // 2、创建root并渲染App组件
+        const root = ReactDOM.createRoot(document.querySelector("#root"))
+        root.render(<App/>)
+    </script>
+    
+</body>
+</html>

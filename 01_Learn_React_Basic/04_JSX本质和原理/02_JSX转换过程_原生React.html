@@ -23,31 +23,14 @@
                 super()
                 this.state = {
                     message: "Hello World",
-                    isReady: true,
-                    friend:null
                 }
             }
             
             render(){
-                const { isReady,friend } = this.state
-
-                {/* 1、条件判断方式一：使用if进行条件判断 */}
-                let showElement = null
-                if(isReady){
-                    showElement = <h2>准备开始比赛</h2>
-                }else{
-                    showElement = <h2>请提前做好准备</h2>
-                }
+                const { message } = this.state
                 return (
                     <div>
-                        {/* 1、方式一：根据条件给变量复制不同的内容 */}
-                        { showElement }
-
-                        {/* 2、方式二：三元运算符 */}
-                        <div>{ isReady ? <button>开始战斗！</button>:<button>准备！</button> }</div>
-
-                        {/* 3、方式三：&&逻辑与运算符*/}
-                        <div>{ friend && <div>{friend.name+" "+friend.desc}</div> }</div>
+                        <h2>{ message }</h2>
                     </div>
                 )
             }

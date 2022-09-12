@@ -1,0 +1,15 @@
+.nav-bar{
+    display: flex;
+    height: 60px;
+    text-align: center;
+}
+
+.left,.right{
+    width: 80px;
+    background-color: aqua;
+}
+
+.center{
+    flex: 1;
+    background-color: blue;
+}
